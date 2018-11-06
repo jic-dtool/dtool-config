@@ -16,7 +16,13 @@ setup(
     url=url,
     install_requires=[
         "dtoolcore",
+        "click",
     ],
+    entry_points={
+        "dtool.cli": [
+            "config=dtool_config.cli:config",
+        ],
+    },
     download_url="{}/tarball/{}".format(url, version),
     license="MIT"
 )
