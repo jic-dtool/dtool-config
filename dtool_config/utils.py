@@ -39,6 +39,8 @@ def _set(config_fpath, key, value):
     with open(config_fpath, "w") as fh:
         json.dump(config_content, fh)
 
+    return _get(config_fpath, key)
+
 
 def get_username(config_fpath):
     """Return the user name.
@@ -55,4 +57,4 @@ def set_username(config_fpath, username):
     :param config_fpath: path to the dtool config file
     :param username: user name
     """
-    _set(config_fpath, USERNAME_KEY, username)
+    return _set(config_fpath, USERNAME_KEY, username)
