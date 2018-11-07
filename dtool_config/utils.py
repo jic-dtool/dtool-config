@@ -43,7 +43,7 @@ def _set(config_fpath, key, value):
     mkdir_parents(os.path.dirname(config_fpath))
 
     with open(config_fpath, "w") as fh:
-        json.dump(config_content, fh)
+        json.dump(config_content, fh, sort_keys=True, indent=2)
 
     return _get(config_fpath, key)
 
