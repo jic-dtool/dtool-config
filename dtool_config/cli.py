@@ -94,12 +94,25 @@ def cache():
     "scheme",
     type=click.Choice(dtool_config.utils.CACHE_KEYS.keys())
 )
+def get(scheme):
+    """Print the cache directory of the specific storage scheme."""
+    click.secho(dtool_config.utils.get_cache(
+        CONFIG_PATH,
+        scheme,
+    ))
+
+
+@cache.command()
+@click.argument(
+    "scheme",
+    type=click.Choice(dtool_config.utils.CACHE_KEYS.keys())
+)
 @click.argument(
     "cache_directory_path",
     type=click.Path(exists=True, file_okay=False)
 )
 def set(scheme, cache_directory_path):
-    """Configure the cache directory of a specific storage scheme."""
+    """Configure the cache directory of the specific storage scheme."""
     click.secho(dtool_config.utils.set_cache(
         CONFIG_PATH,
         scheme,
