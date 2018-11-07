@@ -27,4 +27,16 @@ def test_set_get_name(tmp_dir_fixture):  # NOQA
 
 
 def test_set_get_email(tmp_dir_fixture):  # NOQA
-    pass
+    import dtool_config.utils
+
+    config_fpath = os.path.join(tmp_dir_fixture, "dtool.json")
+
+    assert dtool_config.utils.get_user_email(config_fpath) == ""
+
+    email = "pat@example.com"
+    dtool_config.utils.set_user_email(config_fpath, email)
+    assert dtool_config.utils.get_user_email(config_fpath) == email
+
+    email = "postman.pat@example.com"
+    dtool_config.utils.set_user_email(config_fpath, email)
+    assert dtool_config.utils.get_user_email(config_fpath) == email
