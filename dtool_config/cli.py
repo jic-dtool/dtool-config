@@ -82,3 +82,26 @@ def secret_access_key(ecs_secret_access_key):
             CONFIG_PATH,
             ecs_secret_access_key
         ))
+
+
+@config.group()
+def cache():
+    """Configure ECS S3 object storage."""
+
+
+@cache.command()
+@click.argument(
+    "scheme",
+    type=click.Choice(dtool_config.utils.CACHE_KEYS.keys())
+)
+@click.argument(
+    "cache_directory_path",
+    type=click.Path(exists=True, file_okay=False)
+)
+def set(scheme, cache_directory_path):
+    """Configure the cache directory of a specific storage scheme."""
+    click.secho(dtool_config.utils.set_cache(
+        CONFIG_PATH,
+        scheme,
+        cache_directory_path
+    ))

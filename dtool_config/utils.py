@@ -12,6 +12,14 @@ ECS_ENDPOINT_KEY = "DTOOL_ECS_ENDPOINT"
 ECS_ACCESS_KEY_ID_KEY = "DTOOL_ECS_ACCESS_KEY_ID"
 ECS_SECRET_ACCESS_KEY_KEY = "DTOOL_ECS_SECRET_ACCESS_KEY"
 
+CACHE_KEYS = {
+    "azure": "DTOOL_AZURE_CACHE_DIRECTORY",
+    "ecs": "DTOOL_ECS_CACHE_DIRECTORY",
+    "http": "DTOOL_HTTP_CACHE_DIRECTORY",
+    "irods": "DTOOL_IRODS_CACHE_DIRECTORY",
+    "s3": "DTOOL_S3_CACHE_DIRECTORY",
+}
+
 
 def _get_config_content(config_fpath):
 
@@ -142,3 +150,24 @@ def set_ecs_secret_access_key(config_fpath, ecs_secret_access_key):
     :param ecs_secret_access_key: ECS secret access key
     """
     return _set(config_fpath, ECS_SECRET_ACCESS_KEY_KEY, ecs_secret_access_key)
+
+
+def get_cache(config_fpath, storage_scheme):
+    """Return the cache directory for the specified storage broker.
+
+    :param config_fpath: path to the dtool config file
+    :param storage_scheme: storage scheme (as in URI scheme)
+    :returns: the ECS secret access key or an empty string
+    """
+
+    return _get(config_fpath, CACHE_KEYS[storage_scheme])
+
+
+def set_cache(config_fpath, storage_scheme, cache_dir):
+    """Write the ECS access key id to the dtool config file.
+
+    :param config_fpath: path to the dtool config file
+    :param storage_scheme: storage scheme (as in URI scheme)
+    :param cache_dir: ECS cache direcotory
+    """
+    return _set(config_fpath, CACHE_KEYS[storage_scheme], cache_dir)

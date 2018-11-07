@@ -91,3 +91,16 @@ def test_set_get_ecs_secret_access_key(tmp_dir_fixture):  # NOQA
     key = "secret"
     dtool_config.utils.set_ecs_secret_access_key(config_fpath, key)
     assert dtool_config.utils.get_ecs_secret_access_key(config_fpath) == key
+
+
+def test_set_ls_cache(tmp_dir_fixture):  # NOQA
+
+    import dtool_config.utils
+
+    config_fpath = os.path.join(tmp_dir_fixture, "dtool.json")
+
+    assert dtool_config.utils.get_cache(config_fpath, "ecs") == ""
+
+    ecs_cache_dir = os.path.join(tmp_dir_fixture, "ecs")
+    dtool_config.utils.set_cache(config_fpath, "ecs", ecs_cache_dir)
+    assert dtool_config.utils.get_cache(config_fpath, "ecs") == ecs_cache_dir
