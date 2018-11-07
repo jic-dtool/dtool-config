@@ -98,7 +98,7 @@ def get(scheme):
     """Print the cache directory of the specific storage scheme."""
     click.secho(dtool_config.utils.get_cache(
         CONFIG_PATH,
-        scheme,
+        scheme
     ))
 
 
@@ -118,3 +118,30 @@ def set(scheme, cache_directory_path):
         scheme,
         cache_directory_path
     ))
+
+
+@cache.command()
+def ls():
+    """List the storage scheme cache directories."""
+    for scheme in dtool_config.utils.CACHE_KEYS.keys():
+        line = "{}\t{}".format(
+            scheme,
+            dtool_config.utils.get_cache(CONFIG_PATH, scheme)
+        )
+        click.secho(line)
+
+
+@click.argument(
+    "cache_directory_path",
+    type=click.Path(exists=True, file_okay=False)
+)
+@cache.command()
+def set_all(cache_directory_path):
+    """Configure the cache directory for all storage schemes."""
+    for scheme in dtool_config.utils.CACHE_KEYS.keys():
+        click.secho(scheme + "\t", nl=False)
+        click.secho(dtool_config.utils.set_cache(
+            CONFIG_PATH,
+            scheme,
+            cache_directory_path
+        ))
