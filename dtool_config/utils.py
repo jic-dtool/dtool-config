@@ -12,6 +12,8 @@ ECS_ENDPOINT_KEY = "DTOOL_ECS_ENDPOINT"
 ECS_ACCESS_KEY_ID_KEY = "DTOOL_ECS_ACCESS_KEY_ID"
 ECS_SECRET_ACCESS_KEY_KEY = "DTOOL_ECS_SECRET_ACCESS_KEY"
 
+AZURE_KEY_PREFIX = "DTOOL_AZURE_ACCOUNT_KEY_"
+
 CACHE_KEYS = {
     "azure": "DTOOL_AZURE_CACHE_DIRECTORY",
     "ecs": "DTOOL_ECS_CACHE_DIRECTORY",
@@ -171,3 +173,40 @@ def set_cache(config_fpath, storage_scheme, cache_dir):
     :param cache_dir: ECS cache direcotory
     """
     return _set(config_fpath, CACHE_KEYS[storage_scheme], cache_dir)
+
+
+def get_azure_secret_access_key(config_fpath, container):
+    """Return the Azure storage container secret access key.
+
+    :param config_fpath: path to the dtool config file
+    :param container: azure storage container name
+    :returns: the Azure container secret access key or an empty string
+    """
+    key = AZURE_KEY_PREFIX + container
+    return _get(config_fpath, key)
+
+
+def set_azure_secret_access_key(config_fpath, container, az_secret_access_key):
+    """Write the ECS access key id to the dtool config file.
+
+    :param config_fpath: path to the dtool config file
+    :param container: azure storage container name
+    :param az_secret_access_key: azure secret access key for the container
+    """
+    key = AZURE_KEY_PREFIX + container
+    return _set(config_fpath, key, az_secret_access_key)
+
+
+def list_azure_containers(config_fpath):
+    """List the azure storage containers in the config file.
+
+    :param config_fpath: path to the dtool config file
+    :returns: the list of azure storage container names
+    """
+    config_content = _get_config_content(config_fpath)
+    az_container_names = []
+    for key in config_content.keys():
+        if key.startswith(AZURE_KEY_PREFIX):
+            name = key[len(AZURE_KEY_PREFIX):]
+            az_container_names.append(name)
+    return sorted(az_container_names)
