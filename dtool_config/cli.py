@@ -152,7 +152,7 @@ def azure():
     """Configure Azure Storage."""
 
 
-@azure.command()
+@azure.command()  # NOQA
 @click.argument("container")
 def get(container):
     """Print the secret access key of the specified Azure storage container."""
@@ -162,7 +162,7 @@ def get(container):
     ))
 
 
-@azure.command()
+@azure.command()  # NOQA
 @click.argument("container")
 @click.argument("azure_secret_access_key")
 def set(container, azure_secret_access_key):
@@ -174,7 +174,7 @@ def set(container, azure_secret_access_key):
     ))
 
 
-@azure.command()
+@azure.command()  # NOQA
 def ls():
     """List all Azure storage containers."""
     for container in dtool_config.utils.list_azure_containers(CONFIG_PATH):
