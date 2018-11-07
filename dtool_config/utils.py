@@ -9,6 +9,7 @@ USERNAME_KEY = "DTOOL_USER_FULL_NAME"
 USER_EMAIL_KEY = "DTOOL_USER_EMAIL"
 
 ECS_ENDPOINT_KEY = "DTOOL_ECS_ENDPOINT"
+ECS_ACCESS_KEY_ID_KEY = "DTOOL_ECS_ACCESS_KEY_ID"
 
 
 def _get_config_content(config_fpath):
@@ -104,3 +105,21 @@ def set_ecs_endpoint(config_fpath, ecs_endpoint):
     :param ecs_endpoint: ECS endpoint URL
     """
     return _set(config_fpath, ECS_ENDPOINT_KEY, ecs_endpoint)
+
+
+def get_ecs_access_key_id(config_fpath):
+    """Return the ECS access key id.
+
+    :param config_fpath: path to the dtool config file
+    :returns: the ECS access key id or an empty string
+    """
+    return _get(config_fpath, ECS_ACCESS_KEY_ID_KEY)
+
+
+def set_ecs_access_key_id(config_fpath, ecs_access_key_id):
+    """Write the ECS access key id to the dtool config file.
+
+    :param config_fpath: path to the dtool config file
+    :param ecs_access_key_id: ECS access key id
+    """
+    return _set(config_fpath, ECS_ACCESS_KEY_ID_KEY, ecs_access_key_id)

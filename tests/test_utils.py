@@ -65,3 +65,16 @@ def test_set_get_ecs_endpoint(tmp_dir_fixture):  # NOQA
     ecs_endpoint = "http://blueberry.famous.uni.ac.uk"
     dtool_config.utils.set_ecs_endpoint(config_fpath, ecs_endpoint)
     assert dtool_config.utils.get_ecs_endpoint(config_fpath) == ecs_endpoint
+
+
+def test_set_get_ecs_access_key_id(tmp_dir_fixture):  # NOQA
+
+    import dtool_config.utils
+
+    config_fpath = os.path.join(tmp_dir_fixture, "dtool.json")
+
+    assert dtool_config.utils.get_ecs_access_key_id(config_fpath) == ""
+
+    acc_key_id = "patp"
+    dtool_config.utils.set_ecs_access_key_id(config_fpath, acc_key_id)
+    assert dtool_config.utils.get_ecs_access_key_id(config_fpath) == acc_key_id

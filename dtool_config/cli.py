@@ -56,3 +56,16 @@ def endpoint(url):
         click.secho(dtool_config.utils.get_ecs_endpoint(CONFIG_PATH))
     else:
         click.secho(dtool_config.utils.set_ecs_endpoint(CONFIG_PATH, url))
+
+
+@ecs.command()
+@click.argument("ecs_access_key_id", required=False)
+def access_key_id(ecs_access_key_id):
+    """Display / set / update the ECS access key id."""
+    if not ecs_access_key_id:
+        click.secho(dtool_config.utils.get_ecs_access_key_id(CONFIG_PATH))
+    else:
+        click.secho(dtool_config.utils.set_ecs_access_key_id(
+            CONFIG_PATH,
+            ecs_access_key_id
+        ))
