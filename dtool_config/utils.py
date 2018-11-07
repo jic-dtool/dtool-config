@@ -45,6 +45,8 @@ def _set(config_fpath, key, value):
     with open(config_fpath, "w") as fh:
         json.dump(config_content, fh, sort_keys=True, indent=2)
 
+    os.chmod(config_fpath, 33216)
+
     return _get(config_fpath, key)
 
 
