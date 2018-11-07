@@ -41,3 +41,17 @@ def email(email_address):
             CONFIG_PATH,
             email_address
         ))
+
+
+@config.group()
+def ecs():
+    """Configure ECS S3 object storage."""
+
+@ecs.command()
+@click.argument("url", required=False)
+def endpoint(url):
+    """Display / set / update the ECS endpoint URL."""
+    if not url:
+        click.secho(dtool_config.utils.get_ecs_endpoint(CONFIG_PATH))
+    else:
+        click.secho(dtool_config.utils.set_ecs_endpoint(CONFIG_PATH, url))

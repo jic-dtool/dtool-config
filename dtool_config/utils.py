@@ -8,6 +8,8 @@ from dtoolcore.utils import mkdir_parents
 USERNAME_KEY = "DTOOL_USER_FULL_NAME"
 USER_EMAIL_KEY = "DTOOL_USER_EMAIL"
 
+ECS_ENDPOINT_KEY = "DTOOL_ECS_ENDPOINT"
+
 
 def _get_config_content(config_fpath):
 
@@ -84,3 +86,21 @@ def set_user_email(config_fpath, email):
     :param email: user email
     """
     return _set(config_fpath, USER_EMAIL_KEY, email)
+
+
+def get_ecs_endpoint(config_fpath):
+    """Return the ECS endpoint URL.
+
+    :param config_fpath: path to the dtool config file
+    :returns: the ECS endpoint URL or an empty string
+    """
+    return _get(config_fpath, ECS_ENDPOINT_KEY)
+
+
+def set_ecs_endpoint(config_fpath, ecs_endpoint):
+    """Write the ECS endpoint URL to the dtool config file.
+
+    :param config_fpath: path to the dtool config file
+    :param ecs_endpoint: ECS endpoint URL
+    """
+    return _set(config_fpath, ECS_ENDPOINT_KEY, ecs_endpoint)
