@@ -145,3 +145,37 @@ def set_all(cache_directory_path):
             scheme,
             cache_directory_path
         ))
+
+
+@config.group()
+def azure():
+    """Configure Azure Storage."""
+
+
+@azure.command()
+@click.argument("container")
+def get(container):
+    """Print the secret access key of the specified Azure storage container."""
+    click.secho(dtool_config.utils.get_azure_secret_access_key(
+        CONFIG_PATH,
+        container,
+    ))
+
+
+@azure.command()
+@click.argument("container")
+@click.argument("azure_secret_access_key")
+def set(container, azure_secret_access_key):
+    """Configure the cache directory of the specific storage scheme."""
+    click.secho(dtool_config.utils.set_azure_secret_access_key(
+        CONFIG_PATH,
+        container,
+        azure_secret_access_key
+    ))
+
+
+@azure.command()
+def ls():
+    """List all Azure storage containers."""
+    for container in dtool_config.utils.list_azure_containers(CONFIG_PATH):
+        click.secho(container)
