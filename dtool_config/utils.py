@@ -3,6 +3,8 @@
 import os
 import json
 
+from dtoolcore.utils import mkdir_parents
+
 USERNAME_KEY = "DTOOL_USER_FULL_NAME"
 
 
@@ -35,6 +37,9 @@ def _set(config_fpath, key, value):
 
     # Add/update the key/value pair.
     config_content[key] = value
+
+    # Create parent directories if they are missing.
+    mkdir_parents(os.path.dirname(config_fpath))
 
     with open(config_fpath, "w") as fh:
         json.dump(config_content, fh)
