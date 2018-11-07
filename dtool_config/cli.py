@@ -28,3 +28,16 @@ def name(username):
         click.secho(dtool_config.utils.get_username(CONFIG_PATH))
     else:
         click.secho(dtool_config.utils.set_username(CONFIG_PATH, username))
+
+
+@user.command()
+@click.argument("email_address", required=False)
+def email(email_address):
+    """Display / set / update the user email."""
+    if not email_address:
+        click.secho(dtool_config.utils.get_user_email(CONFIG_PATH))
+    else:
+        click.secho(dtool_config.utils.set_user_email(
+            CONFIG_PATH,
+            email_address
+        ))
