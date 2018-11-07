@@ -47,6 +47,7 @@ def email(email_address):
 def ecs():
     """Configure ECS S3 object storage."""
 
+
 @ecs.command()
 @click.argument("url", required=False)
 def endpoint(url):
