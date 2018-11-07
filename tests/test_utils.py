@@ -78,3 +78,16 @@ def test_set_get_ecs_access_key_id(tmp_dir_fixture):  # NOQA
     acc_key_id = "patp"
     dtool_config.utils.set_ecs_access_key_id(config_fpath, acc_key_id)
     assert dtool_config.utils.get_ecs_access_key_id(config_fpath) == acc_key_id
+
+
+def test_set_get_ecs_secret_access_key(tmp_dir_fixture):  # NOQA
+
+    import dtool_config.utils
+
+    config_fpath = os.path.join(tmp_dir_fixture, "dtool.json")
+
+    assert dtool_config.utils.get_ecs_secret_access_key(config_fpath) == ""
+
+    key = "secret"
+    dtool_config.utils.set_ecs_secret_access_key(config_fpath, key)
+    assert dtool_config.utils.get_ecs_secret_access_key(config_fpath) == key

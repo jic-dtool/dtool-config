@@ -69,3 +69,16 @@ def access_key_id(ecs_access_key_id):
             CONFIG_PATH,
             ecs_access_key_id
         ))
+
+
+@ecs.command()
+@click.argument("ecs_secret_access_key", required=False)
+def secret_access_key(ecs_secret_access_key):
+    """Display / set / update the ECS secret access key."""
+    if not ecs_secret_access_key:
+        click.secho(dtool_config.utils.get_ecs_secret_access_key(CONFIG_PATH))
+    else:
+        click.secho(dtool_config.utils.set_ecs_secret_access_key(
+            CONFIG_PATH,
+            ecs_secret_access_key
+        ))
