@@ -17,6 +17,28 @@ dtool CLI commands for configuring dtool settings
 Installation
 ------------
 
-.. code-block:: bash
+Installation using ``pip``::
 
     pip install dtool-config
+
+Example usage
+-------------
+
+Setting the user name and email::
+
+    dtool config user name "Marie Curie"
+    dtool config user email marie.curie@sorbonne-universite.fr
+
+Setting the download cache::
+
+    mkdir /tmp/dtool
+    dtool config cache set_all /tmp/dtool
+
+
+Related packages
+----------------
+
+- `dtoolcore <https://github.com/jic-dtool/dtoolcore>`_
+- `dtool-cli <https://github.com/jic-dtool/dtool-cli>`_
+- `dtool-info <https://github.com/jic-dtool/dtool-create>`_
+- `dtool-create <https://github.com/jic-dtool/dtool-create>`_
