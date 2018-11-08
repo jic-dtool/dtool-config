@@ -1,11 +1,22 @@
-README
-======
+dtool CLI commands for configuring dtool settings
+=================================================
 
-Plugin to make configuration of dtool easier
+.. image:: https://badge.fury.io/py/dtool-config.svg
+   :target: http://badge.fury.io/py/dtool-config
+   :alt: PyPi package
 
-To install the dtool_config package.
+.. image:: https://travis-ci.org/jic-dtool/dtool-config.svg?branch=master
+   :target: https://travis-ci.org/jic-dtool/dtool-config
+   :alt: Travis CI build status (Linux)
+
+.. image:: https://codecov.io/github/jic-dtool/dtool-config/coverage.svg?branch=master
+   :target: https://codecov.io/github/jic-dtool/dtool-config?branch=master
+   :alt: Code Coverage
+
+
+Installation
+------------
 
 .. code-block:: bash
 
-    cd dtool_config
-    python setup.py install
+    pip install dtool-config
