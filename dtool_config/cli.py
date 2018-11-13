@@ -166,7 +166,7 @@ def get(container):
 @click.argument("container")
 @click.argument("azure_secret_access_key")
 def set(container, azure_secret_access_key):
-    """Configure the cache directory of the specific storage scheme."""
+    """Set/update the access key for the specified Azure storage container."""
     click.secho(dtool_config.utils.set_azure_secret_access_key(
         CONFIG_PATH,
         container,
