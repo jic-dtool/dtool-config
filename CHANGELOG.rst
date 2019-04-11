@@ -26,6 +26,9 @@ Removed
 Fixed
 ^^^^^
 
+- Fixed defect  when username was supplied as two separate strings to
+  ``dtool config user name``
+
 
 Security
 ^^^^^^^^

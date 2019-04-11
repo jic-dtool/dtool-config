@@ -21,13 +21,14 @@ def user():
 
 
 @user.command()
-@click.argument("username", required=False)
+@click.argument("username", nargs=-1, required=False)
 def name(username):
     """Display / set / update the user name."""
     if not username:
         click.secho(dtool_config.utils.get_username(CONFIG_PATH))
     else:
-        click.secho(dtool_config.utils.set_username(CONFIG_PATH, username))
+        username_str = " ".join(username)
+        click.secho(dtool_config.utils.set_username(CONFIG_PATH, username_str))
 
 
 @user.command()
