@@ -1,9 +1,10 @@
 """Helper functions for getting and setting config values."""
 
-import os
-import json
-
-from dtoolcore.utils import mkdir_parents
+from dtoolcore.utils import (
+    _get_config_dict_from_file,
+    get_config_value_from_file,
+    write_config_value_to_file,
+)
 
 USERNAME_KEY = "DTOOL_USER_FULL_NAME"
 USER_EMAIL_KEY = "DTOOL_USER_EMAIL"
@@ -23,54 +24,13 @@ CACHE_KEYS = {
 }
 
 
-def _get_config_content(config_fpath):
-
-    # Default (empty) content will be used if config file does not exist.
-    config_content = {}
-
-    # If the config file exists we use that content.
-    if os.path.isfile(config_fpath):
-        with open(config_fpath) as fh:
-            config_content = json.load(fh)
-
-    return config_content
-
-
-def _get(config_fpath, key):
-
-    config_content = _get_config_content(config_fpath)
-
-    if key not in config_content:
-        return ""
-
-    return config_content[key]
-
-
-def _set(config_fpath, key, value):
-
-    config_content = _get_config_content(config_fpath)
-
-    # Add/update the key/value pair.
-    config_content[key] = value
-
-    # Create parent directories if they are missing.
-    mkdir_parents(os.path.dirname(config_fpath))
-
-    with open(config_fpath, "w") as fh:
-        json.dump(config_content, fh, sort_keys=True, indent=2)
-
-    os.chmod(config_fpath, 33216)
-
-    return _get(config_fpath, key)
-
-
 def get_username(config_fpath):
     """Return the user name.
 
     :param config_fpath: path to the dtool config file
     :returns: the user name or an empty string
     """
-    return _get(config_fpath, USERNAME_KEY)
+    return get_config_value_from_file(USERNAME_KEY, config_fpath, "")
 
 
 def set_username(config_fpath, username):
@@ -79,7 +39,7 @@ def set_username(config_fpath, username):
     :param config_fpath: path to the dtool config file
     :param username: user name
     """
-    return _set(config_fpath, USERNAME_KEY, username)
+    return write_config_value_to_file(USERNAME_KEY, username, config_fpath)
 
 
 def get_user_email(config_fpath):
@@ -88,7 +48,7 @@ def get_user_email(config_fpath):
     :param config_fpath: path to the dtool config file
     :returns: the user email or an empty string
     """
-    return _get(config_fpath, USER_EMAIL_KEY)
+    return get_config_value_from_file(USER_EMAIL_KEY, config_fpath, "")
 
 
 def set_user_email(config_fpath, email):
@@ -97,7 +57,7 @@ def set_user_email(config_fpath, email):
     :param config_fpath: path to the dtool config file
     :param email: user email
     """
-    return _set(config_fpath, USER_EMAIL_KEY, email)
+    return write_config_value_to_file(USER_EMAIL_KEY, email, config_fpath)
 
 
 def get_ecs_endpoint(config_fpath):
@@ -106,7 +66,7 @@ def get_ecs_endpoint(config_fpath):
     :param config_fpath: path to the dtool config file
     :returns: the ECS endpoint URL or an empty string
     """
-    return _get(config_fpath, ECS_ENDPOINT_KEY)
+    return get_config_value_from_file(ECS_ENDPOINT_KEY, config_fpath, "")
 
 
 def set_ecs_endpoint(config_fpath, ecs_endpoint):
@@ -115,7 +75,11 @@ def set_ecs_endpoint(config_fpath, ecs_endpoint):
     :param config_fpath: path to the dtool config file
     :param ecs_endpoint: ECS endpoint URL
     """
-    return _set(config_fpath, ECS_ENDPOINT_KEY, ecs_endpoint)
+    return write_config_value_to_file(
+        ECS_ENDPOINT_KEY,
+        ecs_endpoint,
+        config_fpath
+    )
 
 
 def get_ecs_access_key_id(config_fpath):
@@ -124,7 +88,7 @@ def get_ecs_access_key_id(config_fpath):
     :param config_fpath: path to the dtool config file
     :returns: the ECS access key id or an empty string
     """
-    return _get(config_fpath, ECS_ACCESS_KEY_ID_KEY)
+    return get_config_value_from_file(ECS_ACCESS_KEY_ID_KEY, config_fpath, "")
 
 
 def set_ecs_access_key_id(config_fpath, ecs_access_key_id):
@@ -133,7 +97,11 @@ def set_ecs_access_key_id(config_fpath, ecs_access_key_id):
     :param config_fpath: path to the dtool config file
     :param ecs_access_key_id: ECS access key id
     """
-    return _set(config_fpath, ECS_ACCESS_KEY_ID_KEY, ecs_access_key_id)
+    return write_config_value_to_file(
+        ECS_ACCESS_KEY_ID_KEY,
+        ecs_access_key_id,
+        config_fpath
+    )
 
 
 def get_ecs_secret_access_key(config_fpath):
@@ -142,7 +110,11 @@ def get_ecs_secret_access_key(config_fpath):
     :param config_fpath: path to the dtool config file
     :returns: the ECS secret access key or an empty string
     """
-    return _get(config_fpath, ECS_SECRET_ACCESS_KEY_KEY)
+    return get_config_value_from_file(
+        ECS_SECRET_ACCESS_KEY_KEY,
+        config_fpath,
+        ""
+    )
 
 
 def set_ecs_secret_access_key(config_fpath, ecs_secret_access_key):
@@ -151,7 +123,11 @@ def set_ecs_secret_access_key(config_fpath, ecs_secret_access_key):
     :param config_fpath: path to the dtool config file
     :param ecs_secret_access_key: ECS secret access key
     """
-    return _set(config_fpath, ECS_SECRET_ACCESS_KEY_KEY, ecs_secret_access_key)
+    return write_config_value_to_file(
+        ECS_SECRET_ACCESS_KEY_KEY,
+        ecs_secret_access_key,
+        config_fpath
+    )
 
 
 def get_cache(config_fpath, storage_scheme):
@@ -162,7 +138,11 @@ def get_cache(config_fpath, storage_scheme):
     :returns: the ECS secret access key or an empty string
     """
 
-    return _get(config_fpath, CACHE_KEYS[storage_scheme])
+    return get_config_value_from_file(
+        CACHE_KEYS[storage_scheme],
+        config_fpath,
+        ""
+    )
 
 
 def set_cache(config_fpath, storage_scheme, cache_dir):
@@ -172,7 +152,11 @@ def set_cache(config_fpath, storage_scheme, cache_dir):
     :param storage_scheme: storage scheme (as in URI scheme)
     :param cache_dir: ECS cache direcotory
     """
-    return _set(config_fpath, CACHE_KEYS[storage_scheme], cache_dir)
+    return write_config_value_to_file(
+        CACHE_KEYS[storage_scheme],
+        cache_dir,
+        config_fpath
+    )
 
 
 def get_azure_secret_access_key(config_fpath, container):
@@ -183,7 +167,7 @@ def get_azure_secret_access_key(config_fpath, container):
     :returns: the Azure container secret access key or an empty string
     """
     key = AZURE_KEY_PREFIX + container
-    return _get(config_fpath, key)
+    return get_config_value_from_file(key, config_fpath, "")
 
 
 def set_azure_secret_access_key(config_fpath, container, az_secret_access_key):
@@ -194,7 +178,7 @@ def set_azure_secret_access_key(config_fpath, container, az_secret_access_key):
     :param az_secret_access_key: azure secret access key for the container
     """
     key = AZURE_KEY_PREFIX + container
-    return _set(config_fpath, key, az_secret_access_key)
+    return write_config_value_to_file(key, az_secret_access_key, config_fpath)
 
 
 def list_azure_containers(config_fpath):
@@ -203,7 +187,7 @@ def list_azure_containers(config_fpath):
     :param config_fpath: path to the dtool config file
     :returns: the list of azure storage container names
     """
-    config_content = _get_config_content(config_fpath)
+    config_content = _get_config_dict_from_file(config_fpath)
     az_container_names = []
     for key in config_content.keys():
         if key.startswith(AZURE_KEY_PREFIX):

@@ -15,7 +15,7 @@ setup(
     author_email="tjelvar.olsson@jic.ac.uk",
     url=url,
     install_requires=[
-        "dtoolcore",
+        "dtoolcore>=3.9.0",
         "click",
     ],
     entry_points={
