@@ -32,7 +32,7 @@ Setting the user name and email::
 Setting the download cache::
 
     mkdir /tmp/dtool
-    dtool config cache set_all /tmp/dtool
+    dtool config cache /tmp/dtool
 
 
 Related packages
