@@ -11,6 +11,10 @@ from dtoolcore.utils import (
 USERNAME_KEY = "DTOOL_USER_FULL_NAME"
 USER_EMAIL_KEY = "DTOOL_USER_EMAIL"
 
+README_TEMPLATE_KEY = "DTOOL_README_TEMPLATE_FPATH"
+
+CACHE_DIRECTORY_KEY = "DTOOL_CACHE_DIRECTORY"
+
 ECS_ENDPOINT_KEY = "DTOOL_ECS_ENDPOINT"
 ECS_ACCESS_KEY_ID_KEY = "DTOOL_ECS_ACCESS_KEY_ID"
 ECS_SECRET_ACCESS_KEY_KEY = "DTOOL_ECS_SECRET_ACCESS_KEY"
@@ -52,6 +56,28 @@ def set_user_email(config_fpath, email):
     :param email: user email
     """
     return write_config_value_to_file(USER_EMAIL_KEY, email, config_fpath)
+
+
+def get_readme_template_fpath(config_fpath):
+    """Return the readme template path.
+
+    :param config_fpath: path to the dtool config file
+    :returns: path to the readme template file
+    """
+    return get_config_value_from_file(README_TEMPLATE_KEY, config_fpath, "")
+
+
+def set_readme_template_fpath(config_fpath, readme_template_fpath):
+    """Write the user email to the dtool config file.
+
+    :param config_fpath: path to the dtool config file
+    :param readme_template_fpath: path to the readme template file
+    """
+    return write_config_value_to_file(
+        README_TEMPLATE_KEY,
+        readme_template_fpath,
+        config_fpath
+    )
 
 
 def get_ecs_endpoint(config_fpath):
@@ -132,7 +158,7 @@ def get_cache(config_fpath):
     """
 
     return get_config_value_from_file(
-        "DTOOL_CACHE_DIRECTORY",
+        CACHE_DIRECTORY_KEY,
         config_fpath,
         ""
     )
@@ -146,7 +172,7 @@ def set_cache(config_fpath, cache_dir):
     """
     cache_dir = os.path.abspath(cache_dir)
     return write_config_value_to_file(
-        "DTOOL_CACHE_DIRECTORY",
+        CACHE_DIRECTORY_KEY,
         cache_dir,
         config_fpath
     )

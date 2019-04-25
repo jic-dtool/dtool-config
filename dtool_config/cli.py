@@ -44,6 +44,25 @@ def email(email_address):
         ))
 
 
+@config.command()
+@click.argument(
+    "readme_template_file",
+    required=False,
+    type=click.Path(exists=True, dir_okay=False)
+)
+def readme_template(readme_template_file):
+    """Display / set / update the readme template file."""
+    if not readme_template_file:
+        click.secho(dtool_config.utils.get_readme_template_fpath(
+            CONFIG_PATH,
+        ))
+    else:
+        click.secho(dtool_config.utils.set_readme_template_fpath(
+            CONFIG_PATH,
+            readme_template_file
+        ))
+
+
 @config.group()
 def ecs():
     """Configure ECS S3 object storage."""

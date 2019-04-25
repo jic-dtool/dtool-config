@@ -54,6 +54,28 @@ def test_set_get_email(tmp_dir_fixture):  # NOQA
     assert dtool_config.utils.get_user_email(config_fpath) == email
 
 
+def test_set_get_readme_template_fpath(tmp_dir_fixture):  # NOQA
+    import dtool_config.utils
+
+    config_fpath = os.path.join(tmp_dir_fixture, "dtool.json")
+
+    assert dtool_config.utils.get_readme_template_fpath(config_fpath) == ""
+
+    template_fpath = os.path.join(tmp_dir_fixture, "readme.yml")
+    with open(template_fpath, "w") as fh:
+        fh.write("---/ndescription: something\n")
+
+    dtool_config.utils.set_readme_template_fpath(config_fpath, template_fpath)
+    assert dtool_config.utils.get_readme_template_fpath(config_fpath) == template_fpath  # NOQA
+
+    template_fpath_alt = os.path.join(tmp_dir_fixture, "readme_alt.yml")
+    with open(template_fpath_alt, "w") as fh:
+        fh.write("---/ndescription: something else\n")
+
+    dtool_config.utils.set_readme_template_fpath(config_fpath, template_fpath_alt)  # NOQA
+    assert dtool_config.utils.get_readme_template_fpath(config_fpath) == template_fpath_alt  # NOQA
+
+
 def test_set_get_ecs_endpoint(tmp_dir_fixture):  # NOQA
 
     import dtool_config.utils

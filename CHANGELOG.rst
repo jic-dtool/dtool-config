@@ -10,6 +10,9 @@ This change log uses principles from `keep a changelog <http://keepachangelog.co
 Added
 ^^^^^
 
+- ``dtool config readme-template`` CLI command for configuring the path to a
+  custom readme template
+
 
 Changed
 ^^^^^^^
