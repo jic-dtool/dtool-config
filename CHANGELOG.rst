@@ -10,15 +10,9 @@ This change log uses principles from `keep a changelog <http://keepachangelog.co
 Added
 ^^^^^
 
-- ``dtool config readme-template`` CLI command for configuring the path to a
-  custom readme template
-
 
 Changed
 ^^^^^^^
-
-- ``dtool config cache`` now works with one unified cache directory for all
-  storage brokers
 
 
 Deprecated
@@ -32,12 +26,31 @@ Removed
 Fixed
 ^^^^^
 
-- Fixed defect  when username was supplied as two separate strings to
-  ``dtool config user name``
-
 
 Security
 ^^^^^^^^
+
+
+[0.2.0] - 2019-04-25
+--------------------
+
+Added
+^^^^^
+
+- ``dtool config readme-template`` CLI command for configuring the path to a
+  custom readme template
+
+Changed
+^^^^^^^
+
+- ``dtool config cache`` now works with one unified cache directory for all
+  storage brokers
+
+Fixed
+^^^^^
+
+- Fixed defect  when username was supplied as two separate strings to
+  ``dtool config user name``
 
 
 [0.1.1] - 2018-12-12
