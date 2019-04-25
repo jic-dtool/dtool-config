@@ -85,65 +85,21 @@ def secret_access_key(ecs_secret_access_key):
         ))
 
 
-@config.group()
-def cache():
-    """Configure ECS S3 object storage."""
-
-
-@cache.command()
-@click.argument(
-    "scheme",
-    type=click.Choice(dtool_config.utils.CACHE_KEYS.keys())
-)
-def get(scheme):
-    """Print the cache directory of the specific storage scheme."""
-    click.secho(dtool_config.utils.get_cache(
-        CONFIG_PATH,
-        scheme
-    ))
-
-
-@cache.command()
-@click.argument(
-    "scheme",
-    type=click.Choice(dtool_config.utils.CACHE_KEYS.keys())
-)
+@config.command()
 @click.argument(
     "cache_directory_path",
+    required=False,
     type=click.Path(exists=True, file_okay=False)
 )
-def set(scheme, cache_directory_path):
-    """Configure the cache directory of the specific storage scheme."""
-    click.secho(dtool_config.utils.set_cache(
-        CONFIG_PATH,
-        scheme,
-        cache_directory_path
-    ))
-
-
-@cache.command()
-def ls():
-    """List the storage scheme cache directories."""
-    for scheme in dtool_config.utils.CACHE_KEYS.keys():
-        line = "{}\t{}".format(
-            scheme,
-            dtool_config.utils.get_cache(CONFIG_PATH, scheme)
-        )
-        click.secho(line)
-
-
-@click.argument(
-    "cache_directory_path",
-    type=click.Path(exists=True, file_okay=False)
-)
-@cache.command()
-def set_all(cache_directory_path):
-    """Configure the cache directory for all storage schemes."""
-    for scheme in dtool_config.utils.CACHE_KEYS.keys():
-        click.secho(scheme + "\t", nl=False)
+def cache(cache_directory_path):
+    """Display / set / update the dtool cache directory."""
+    if not cache_directory_path:
+        click.secho(dtool_config.utils.get_cache(
+            CONFIG_PATH,
+        ))
+    else:
         click.secho(dtool_config.utils.set_cache(
             CONFIG_PATH,
-            scheme,
             cache_directory_path
         ))
 

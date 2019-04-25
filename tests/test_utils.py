@@ -99,11 +99,11 @@ def test_set_get_cache(tmp_dir_fixture):  # NOQA
 
     config_fpath = os.path.join(tmp_dir_fixture, "dtool.json")
 
-    assert dtool_config.utils.get_cache(config_fpath, "ecs") == ""
+    assert dtool_config.utils.get_cache(config_fpath) == ""
 
-    ecs_cache_dir = os.path.join(tmp_dir_fixture, "ecs")
-    dtool_config.utils.set_cache(config_fpath, "ecs", ecs_cache_dir)
-    assert dtool_config.utils.get_cache(config_fpath, "ecs") == ecs_cache_dir
+    cache_dir = os.path.join(tmp_dir_fixture, "dtool_cache")
+    dtool_config.utils.set_cache(config_fpath, cache_dir)
+    assert dtool_config.utils.get_cache(config_fpath) == cache_dir
 
 
 def test_set_get_azure_container(tmp_dir_fixture):  # NOQA

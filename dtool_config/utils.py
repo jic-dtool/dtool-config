@@ -1,5 +1,7 @@
 """Helper functions for getting and setting config values."""
 
+import os
+
 from dtoolcore.utils import (
     _get_config_dict_from_file,
     get_config_value_from_file,
@@ -14,14 +16,6 @@ ECS_ACCESS_KEY_ID_KEY = "DTOOL_ECS_ACCESS_KEY_ID"
 ECS_SECRET_ACCESS_KEY_KEY = "DTOOL_ECS_SECRET_ACCESS_KEY"
 
 AZURE_KEY_PREFIX = "DTOOL_AZURE_ACCOUNT_KEY_"
-
-CACHE_KEYS = {
-    "azure": "DTOOL_AZURE_CACHE_DIRECTORY",
-    "ecs": "DTOOL_ECS_CACHE_DIRECTORY",
-    "http": "DTOOL_HTTP_CACHE_DIRECTORY",
-    "irods": "DTOOL_IRODS_CACHE_DIRECTORY",
-    "s3": "DTOOL_S3_CACHE_DIRECTORY",
-}
 
 
 def get_username(config_fpath):
@@ -130,30 +124,29 @@ def set_ecs_secret_access_key(config_fpath, ecs_secret_access_key):
     )
 
 
-def get_cache(config_fpath, storage_scheme):
-    """Return the cache directory for the specified storage broker.
+def get_cache(config_fpath):
+    """Return the cache directory specified in the dtool config file.
 
     :param config_fpath: path to the dtool config file
-    :param storage_scheme: storage scheme (as in URI scheme)
-    :returns: the ECS secret access key or an empty string
+    :returns: the path to the dtool cache directory
     """
 
     return get_config_value_from_file(
-        CACHE_KEYS[storage_scheme],
+        "DTOOL_CACHE_DIRECTORY",
         config_fpath,
         ""
     )
 
 
-def set_cache(config_fpath, storage_scheme, cache_dir):
-    """Write the ECS access key id to the dtool config file.
+def set_cache(config_fpath, cache_dir):
+    """Write the cache directory to the dtool config file.
 
     :param config_fpath: path to the dtool config file
-    :param storage_scheme: storage scheme (as in URI scheme)
-    :param cache_dir: ECS cache direcotory
+    :param cache_dir: the path to the dtool cache direcotory
     """
+    cache_dir = os.path.abspath(cache_dir)
     return write_config_value_to_file(
-        CACHE_KEYS[storage_scheme],
+        "DTOOL_CACHE_DIRECTORY",
         cache_dir,
         config_fpath
     )

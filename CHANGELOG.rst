@@ -14,6 +14,9 @@ Added
 Changed
 ^^^^^^^
 
+- ``dtool config cache`` now works with one unified cache directory for all
+  storage brokers
+
 
 Deprecated
 ^^^^^^^^^^
