@@ -10,8 +10,6 @@ This change log uses principles from `keep a changelog <http://keepachangelog.co
 Added
 ^^^^^
 
-- Support for configuring access to buckets in multiple namespaces
-
 
 Changed
 ^^^^^^^
@@ -31,6 +29,14 @@ Fixed
 
 Security
 ^^^^^^^^
+
+[0.3.0] - 2019-05-14
+--------------------
+
+Added
+^^^^^
+
+- Support for configuring access to buckets in multiple namespaces
 
 
 [0.2.0] - 2019-04-25
