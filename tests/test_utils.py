@@ -82,11 +82,11 @@ def test_set_get_ecs_endpoint(tmp_dir_fixture):  # NOQA
 
     config_fpath = os.path.join(tmp_dir_fixture, "dtool.json")
 
-    assert dtool_config.utils.get_ecs_endpoint(config_fpath) == ""
+    assert dtool_config.utils.get_ecs_endpoint(config_fpath, "demo") == ""
 
     ecs_endpoint = "http://blueberry.famous.uni.ac.uk"
-    dtool_config.utils.set_ecs_endpoint(config_fpath, ecs_endpoint)
-    assert dtool_config.utils.get_ecs_endpoint(config_fpath) == ecs_endpoint
+    dtool_config.utils.set_ecs_endpoint(config_fpath, "demo", ecs_endpoint)
+    assert dtool_config.utils.get_ecs_endpoint(config_fpath, "demo") == ecs_endpoint  # NOQA
 
 
 def test_set_get_ecs_access_key_id(tmp_dir_fixture):  # NOQA
@@ -95,11 +95,11 @@ def test_set_get_ecs_access_key_id(tmp_dir_fixture):  # NOQA
 
     config_fpath = os.path.join(tmp_dir_fixture, "dtool.json")
 
-    assert dtool_config.utils.get_ecs_access_key_id(config_fpath) == ""
+    assert dtool_config.utils.get_ecs_access_key_id(config_fpath, "demo") == ""
 
     acc_key_id = "patp"
-    dtool_config.utils.set_ecs_access_key_id(config_fpath, acc_key_id)
-    assert dtool_config.utils.get_ecs_access_key_id(config_fpath) == acc_key_id
+    dtool_config.utils.set_ecs_access_key_id(config_fpath, "demo", acc_key_id)
+    assert dtool_config.utils.get_ecs_access_key_id(config_fpath, "demo") == acc_key_id  # NOQA
 
 
 def test_set_get_ecs_secret_access_key(tmp_dir_fixture):  # NOQA
@@ -108,11 +108,11 @@ def test_set_get_ecs_secret_access_key(tmp_dir_fixture):  # NOQA
 
     config_fpath = os.path.join(tmp_dir_fixture, "dtool.json")
 
-    assert dtool_config.utils.get_ecs_secret_access_key(config_fpath) == ""
+    assert dtool_config.utils.get_ecs_secret_access_key(config_fpath, "demo") == "" # NOQA
 
     key = "secret"
-    dtool_config.utils.set_ecs_secret_access_key(config_fpath, key)
-    assert dtool_config.utils.get_ecs_secret_access_key(config_fpath) == key
+    dtool_config.utils.set_ecs_secret_access_key(config_fpath, "demo", key)
+    assert dtool_config.utils.get_ecs_secret_access_key(config_fpath, "demo") == key  # NOQA
 
 
 def test_set_get_cache(tmp_dir_fixture):  # NOQA

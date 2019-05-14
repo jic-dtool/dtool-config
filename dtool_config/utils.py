@@ -15,9 +15,9 @@ README_TEMPLATE_KEY = "DTOOL_README_TEMPLATE_FPATH"
 
 CACHE_DIRECTORY_KEY = "DTOOL_CACHE_DIRECTORY"
 
-ECS_ENDPOINT_KEY = "DTOOL_ECS_ENDPOINT"
-ECS_ACCESS_KEY_ID_KEY = "DTOOL_ECS_ACCESS_KEY_ID"
-ECS_SECRET_ACCESS_KEY_KEY = "DTOOL_ECS_SECRET_ACCESS_KEY"
+ECS_ENDPOINT_KEY_PREFIX = "DTOOL_ECS_ENDPOINT_"
+ECS_ACCESS_KEY_ID_KEY_PREFIX = "DTOOL_ECS_ACCESS_KEY_ID_"
+ECS_SECRET_ACCESS_KEY_KEY_PREFIX = "DTOOL_ECS_SECRET_ACCESS_KEY_"
 
 AZURE_KEY_PREFIX = "DTOOL_AZURE_ACCOUNT_KEY_"
 
@@ -80,71 +80,87 @@ def set_readme_template_fpath(config_fpath, readme_template_fpath):
     )
 
 
-def get_ecs_endpoint(config_fpath):
+def get_ecs_endpoint(config_fpath, bucket_name):
     """Return the ECS endpoint URL.
 
     :param config_fpath: path to the dtool config file
+    :param bucket_name: name of the bucket in a ECS namespace
     :returns: the ECS endpoint URL or an empty string
     """
-    return get_config_value_from_file(ECS_ENDPOINT_KEY, config_fpath, "")
+    key = ECS_ENDPOINT_KEY_PREFIX + bucket_name
+    return get_config_value_from_file(key, config_fpath, "")
 
 
-def set_ecs_endpoint(config_fpath, ecs_endpoint):
+def set_ecs_endpoint(config_fpath, bucket_name, ecs_endpoint):
     """Write the ECS endpoint URL to the dtool config file.
 
     :param config_fpath: path to the dtool config file
+    :param bucket_name: name of the bucket in a ECS namespace
     :param ecs_endpoint: ECS endpoint URL
     """
+    key = ECS_ENDPOINT_KEY_PREFIX + bucket_name
     return write_config_value_to_file(
-        ECS_ENDPOINT_KEY,
+        key,
         ecs_endpoint,
         config_fpath
     )
 
 
-def get_ecs_access_key_id(config_fpath):
+def get_ecs_access_key_id(config_fpath, bucket_name):
     """Return the ECS access key id.
 
     :param config_fpath: path to the dtool config file
+    :param bucket_name: name of the bucket in a ECS namespace
     :returns: the ECS access key id or an empty string
     """
-    return get_config_value_from_file(ECS_ACCESS_KEY_ID_KEY, config_fpath, "")
+    key = ECS_ACCESS_KEY_ID_KEY_PREFIX + bucket_name
+    return get_config_value_from_file(key, config_fpath, "")
 
 
-def set_ecs_access_key_id(config_fpath, ecs_access_key_id):
+def set_ecs_access_key_id(config_fpath, bucket_name, ecs_access_key_id):
     """Write the ECS access key id to the dtool config file.
 
     :param config_fpath: path to the dtool config file
+    :param bucket_name: name of the bucket in a ECS namespace
     :param ecs_access_key_id: ECS access key id
     """
+    key = ECS_ACCESS_KEY_ID_KEY_PREFIX + bucket_name
     return write_config_value_to_file(
-        ECS_ACCESS_KEY_ID_KEY,
+        key,
         ecs_access_key_id,
         config_fpath
     )
 
 
-def get_ecs_secret_access_key(config_fpath):
+def get_ecs_secret_access_key(config_fpath, bucket_name):
     """Return the ECS secret access key.
 
     :param config_fpath: path to the dtool config file
+    :param bucket_name: name of the bucket in a ECS namespace
     :returns: the ECS secret access key or an empty string
     """
+    key = ECS_SECRET_ACCESS_KEY_KEY_PREFIX + bucket_name
     return get_config_value_from_file(
-        ECS_SECRET_ACCESS_KEY_KEY,
+        key,
         config_fpath,
         ""
     )
 
 
-def set_ecs_secret_access_key(config_fpath, ecs_secret_access_key):
+def set_ecs_secret_access_key(
+    config_fpath,
+    bucket_name,
+    ecs_secret_access_key
+):
     """Write the ECS access key id to the dtool config file.
 
     :param config_fpath: path to the dtool config file
+    :param bucket_name: name of the bucket in a ECS namespace
     :param ecs_secret_access_key: ECS secret access key
     """
+    key = ECS_SECRET_ACCESS_KEY_KEY_PREFIX + bucket_name
     return write_config_value_to_file(
-        ECS_SECRET_ACCESS_KEY_KEY,
+        key,
         ecs_secret_access_key,
         config_fpath
     )

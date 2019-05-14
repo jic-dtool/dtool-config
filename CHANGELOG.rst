@@ -10,6 +10,8 @@ This change log uses principles from `keep a changelog <http://keepachangelog.co
 Added
 ^^^^^
 
+- Support for configuring access to buckets in multiple namespaces
+
 
 Changed
 ^^^^^^^

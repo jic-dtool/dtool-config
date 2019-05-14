@@ -69,37 +69,52 @@ def ecs():
 
 
 @ecs.command()
+@click.argument("bucket_name")
 @click.argument("url", required=False)
-def endpoint(url):
+def endpoint(bucket_name, url):
     """Display / set / update the ECS endpoint URL."""
     if not url:
-        click.secho(dtool_config.utils.get_ecs_endpoint(CONFIG_PATH))
+        click.secho(
+            dtool_config.utils.get_ecs_endpoint(CONFIG_PATH, bucket_name)
+        )
     else:
-        click.secho(dtool_config.utils.set_ecs_endpoint(CONFIG_PATH, url))
+        click.secho(
+            dtool_config.utils.set_ecs_endpoint(CONFIG_PATH, bucket_name, url)
+        )
 
 
 @ecs.command()
+@click.argument("bucket_name")
 @click.argument("ecs_access_key_id", required=False)
-def access_key_id(ecs_access_key_id):
-    """Display / set / update the ECS access key id."""
+def access_key_id(bucket_name, ecs_access_key_id):
+    """Display / set / update the ECS access key id (username)."""
     if not ecs_access_key_id:
-        click.secho(dtool_config.utils.get_ecs_access_key_id(CONFIG_PATH))
+        click.secho(
+            dtool_config.utils.get_ecs_access_key_id(CONFIG_PATH, bucket_name)
+        )
     else:
         click.secho(dtool_config.utils.set_ecs_access_key_id(
             CONFIG_PATH,
+            bucket_name,
             ecs_access_key_id
         ))
 
 
 @ecs.command()
+@click.argument("bucket_name")
 @click.argument("ecs_secret_access_key", required=False)
-def secret_access_key(ecs_secret_access_key):
+def secret_access_key(bucket_name, ecs_secret_access_key):
     """Display / set / update the ECS secret access key."""
     if not ecs_secret_access_key:
-        click.secho(dtool_config.utils.get_ecs_secret_access_key(CONFIG_PATH))
+        click.secho(dtool_config.utils.get_ecs_secret_access_key(
+                CONFIG_PATH,
+                bucket_name
+            )
+        )
     else:
         click.secho(dtool_config.utils.set_ecs_secret_access_key(
             CONFIG_PATH,
+            bucket_name,
             ecs_secret_access_key
         ))
 
