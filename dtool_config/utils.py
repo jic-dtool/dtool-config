@@ -166,7 +166,7 @@ def set_ecs_secret_access_key(
     )
 
 
-def list_ecs_buckets(config_fpath):
+def list_ecs_base_uris(config_fpath):
     """List the ECS buckets in the config file.
 
     :param config_fpath: path to the dtool config file
