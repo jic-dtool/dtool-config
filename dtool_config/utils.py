@@ -166,6 +166,22 @@ def set_ecs_secret_access_key(
     )
 
 
+def list_ecs_buckets(config_fpath):
+    """List the ECS buckets in the config file.
+
+    :param config_fpath: path to the dtool config file
+    :returns: the list of azure storage container names
+    """
+    config_content = _get_config_dict_from_file(config_fpath)
+    ecs_bucket_base_uris = []
+    for key in config_content.keys():
+        if key.startswith(ECS_ACCESS_KEY_ID_KEY_PREFIX):
+            name = key[len(ECS_ACCESS_KEY_ID_KEY_PREFIX):]
+            base_uri = "ecs://{}".format(name)
+            ecs_bucket_base_uris.append(base_uri)
+    return sorted(ecs_bucket_base_uris)
+
+
 def get_cache(config_fpath):
     """Return the cache directory specified in the dtool config file.
 

@@ -10,6 +10,8 @@ This change log uses principles from `keep a changelog <http://keepachangelog.co
 Added
 ^^^^^
 
+- Added ``dtool config ecs ls`` command to list ECS base URIs that have been configured
+
 
 Changed
 ^^^^^^^

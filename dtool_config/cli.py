@@ -119,6 +119,13 @@ def secret_access_key(bucket_name, ecs_secret_access_key):
         ))
 
 
+@ecs.command(name="ls")
+def list_ecs_buckets():
+    """List all ECS base URIs."""
+    for base_uri in dtool_config.utils.list_ecs_buckets(CONFIG_PATH):
+        click.secho(base_uri)
+
+
 @config.command()
 @click.argument(
     "cache_directory_path",
