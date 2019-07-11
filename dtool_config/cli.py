@@ -122,7 +122,7 @@ def secret_access_key(bucket_name, ecs_secret_access_key):
 @ecs.command(name="ls")
 def list_ecs_base_uris():
     """List the configured ECS base URIs."""
-    for base_uri in dtool_config.utils.list_ecs_buckets(CONFIG_PATH):
+    for base_uri in dtool_config.utils.list_ecs_base_uris(CONFIG_PATH):
         click.secho(base_uri)
 
 
