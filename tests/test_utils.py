@@ -101,6 +101,8 @@ def test_set_get_ecs_access_key_id(tmp_dir_fixture):  # NOQA
     dtool_config.utils.set_ecs_access_key_id(config_fpath, "demo", acc_key_id)
     assert dtool_config.utils.get_ecs_access_key_id(config_fpath, "demo") == acc_key_id  # NOQA
 
+    assert dtool_config.utils.list_ecs_base_uris(config_fpath) == ["ecs://demo"]  # NOQA
+
 
 def test_set_get_ecs_secret_access_key(tmp_dir_fixture):  # NOQA
 
@@ -147,5 +149,5 @@ def test_set_get_azure_container(tmp_dir_fixture):  # NOQA
 
     dtool_config.utils.set_azure_secret_access_key(config_fpath, "prod", "s2")
 
-    containers = ["demo", "prod"]
-    assert containers == dtool_config.utils.list_azure_containers(config_fpath)
+    containers = ["azure://demo", "azure://prod"]
+    assert containers == dtool_config.utils.list_azure_base_uris(config_fpath)
