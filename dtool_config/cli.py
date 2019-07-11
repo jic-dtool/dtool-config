@@ -174,6 +174,6 @@ def set(container, azure_secret_access_key):
 
 @azure.command()  # NOQA
 def ls():
-    """List all Azure storage containers."""
-    for container in dtool_config.utils.list_azure_containers(CONFIG_PATH):
-        click.secho(container)
+    """List the configured Azure base URIs."""
+    for base_uri in dtool_config.utils.list_azure_base_uris(CONFIG_PATH):
+        click.secho(base_uri)

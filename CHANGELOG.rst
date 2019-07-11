@@ -10,11 +10,15 @@ This change log uses principles from `keep a changelog <http://keepachangelog.co
 Added
 ^^^^^
 
-- Added ``dtool config ecs ls`` command to list ECS base URIs that have been configured
+- Added ``dtool config ecs ls`` command to list ECS base URIs that have been
+  configured
 
 
 Changed
 ^^^^^^^
+
+- The ``dtool config azure ls`` command now returns base URIs rather than
+  container names
 
 
 Deprecated

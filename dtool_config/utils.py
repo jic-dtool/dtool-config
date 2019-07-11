@@ -232,16 +232,17 @@ def set_azure_secret_access_key(config_fpath, container, az_secret_access_key):
     return write_config_value_to_file(key, az_secret_access_key, config_fpath)
 
 
-def list_azure_containers(config_fpath):
-    """List the azure storage containers in the config file.
+def list_azure_base_uris(config_fpath):
+    """List the configured azure base URIs.
 
     :param config_fpath: path to the dtool config file
-    :returns: the list of azure storage container names
+    :returns: the list of azure base URs
     """
     config_content = _get_config_dict_from_file(config_fpath)
-    az_container_names = []
+    az_base_uris = []
     for key in config_content.keys():
         if key.startswith(AZURE_KEY_PREFIX):
             name = key[len(AZURE_KEY_PREFIX):]
-            az_container_names.append(name)
-    return sorted(az_container_names)
+            base_uri = "azure://{}".format(name)
+            az_base_uris.append(base_uri)
+    return sorted(az_base_uris)
