@@ -5,6 +5,10 @@ dtool CLI commands for configuring dtool settings
    :target: http://badge.fury.io/py/dtool-config
    :alt: PyPi package
 
+.. image:: https://github.com/jic-dtool/dtool-config/actions/workflows/test.yml/badge.svg?branch=main
+   :target: https://github.com/jic-dtool/dtool-config/actions/workflows/test.yml
+   :alt: Tests
+
 .. image:: https://codecov.io/github/jic-dtool/dtool-config/coverage.svg?branch=main
    :target: https://codecov.io/github/jic-dtool/dtool-config?branch=main
    :alt: Code Coverage
