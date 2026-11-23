@@ -1,0 +1,34 @@
+[build-system]
+requires = ["hatchling>=1.27", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "dtool-config"
+description = "Plugin to make configuration of dtool easier"
+readme = "README.rst"
+license = "MIT"
+license-files = ["LICENSE.rst"]
+authors = [
+    {name = "Tjelvar Olsson", email = "tjelvar.olsson@gmail.com"},
+]
+requires-python = ">=3.10"
+dynamic = ["version"]
+dependencies = [
+    "dtoolcore>=3.9.0",
+    "click",
+]
+
+[project.urls]
+Repository = "https://github.com/jic-dtool/dtool-config"
+
+[project.entry-points."dtool.cli"]
+config = "dtool_config.cli:config"
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.version.raw-options]
+local_scheme = "no-local-version"
+
+[tool.hatch.build.targets.wheel]
+packages = ["dtool_config"]
