@@ -10,15 +10,9 @@ This change log uses principles from `keep a changelog <http://keepachangelog.co
 Added
 ^^^^^
 
-- GitHub Actions workflow that publishes a release to PyPI when a version
-  tag is pushed
-
 
 Changed
 ^^^^^^^
-
-- Build system switched to hatchling with hatch-vcs; the version is now
-  derived from git tags
 
 
 Deprecated
@@ -28,8 +22,6 @@ Deprecated
 Removed
 ^^^^^^^
 
-- Support for Python < 3.10
-
 
 Fixed
 ^^^^^
@@ -37,6 +29,27 @@ Fixed
 
 Security
 ^^^^^^^^
+
+
+[0.4.2] - 2026-11-24
+--------------------
+
+Added
+^^^^^
+
+- GitHub Actions workflow that publishes a release to PyPI when a version
+  tag is pushed
+
+Changed
+^^^^^^^
+
+- Build system switched to hatchling with hatch-vcs; the version is now
+  derived from git tags
+
+Removed
+^^^^^^^
+
+- Support for Python < 3.10
 
 
 [0.4.1] - 2021-06-23
