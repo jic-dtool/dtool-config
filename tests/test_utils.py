@@ -22,7 +22,8 @@ def test_permissions_on_config_file(tmp_dir_fixture):  # NOQA
     username = "Postman Pat"
     dtool_config.utils.set_username(config_fpath, username)
 
-    assert os.stat(config_fpath).st_mode == 33216
+    # The config may hold secrets: no access for group or others.
+    assert os.stat(config_fpath).st_mode & 0o077 == 0
 
 
 def test_set_get_name(tmp_dir_fixture):  # NOQA
